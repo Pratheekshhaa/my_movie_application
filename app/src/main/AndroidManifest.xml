@@ -2,7 +2,7 @@
 
     <application
         android:allowBackup="true"
-        android:theme="@style/Theme.MyMovieApp">
+        android:theme="@style/Theme.My_movie_application">
 
         <activity
             android:name=".MainActivity"

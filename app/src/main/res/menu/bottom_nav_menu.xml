@@ -3,17 +3,14 @@
 
     <item
         android:id="@+id/movies"
-        android:title="Movies"
-        android:icon="@drawable/ic_movies"/>
+        android:title="Movies"/>
 
     <item
         android:id="@+id/fav"
-        android:title="Favorites"
-        android:icon="@drawable/ic_favorite"/>
+        android:title="Favorites"/>
 
     <item
         android:id="@+id/watch"
-        android:title="Watchlist"
-        android:icon="@drawable/ic_watchlist"/>
+        android:title="Watchlist"/>
 
 </menu>
