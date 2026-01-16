@@ -82,15 +82,12 @@ app
 ```
 
 ## Setup Instructions
-1. Clone Repository
-``` git clone https://github.com/your-username/my_movie_application.git ```
-
-2️. Open Project
+- Clone Repository: ``` git clone https://github.com/your-username/my_movie_application.git ```
+- Open Project
   - Open Android Studio
   - Select Open Existing Project
   - Choose the cloned folder
-
-3️. Add TMDB API Key
+- Add TMDB API Key
   - Go to: `app/build.gradle.kts`
   - Inside defaultConfig, add:
     ` buildConfigField(
@@ -99,8 +96,7 @@ app
         "\"YOUR_API_KEY_HERE\""
     )`
 You can generate your API key from: ` https://www.themoviedb.org/settings/api`
-
-4️. Sync Project
+- Sync Project
 Click: File → Sync Project with Gradle Files
 
 ## Steps To Run Locally
@@ -117,7 +113,7 @@ Click: File → Sync Project with Gradle Files
     - Horizontal movie rows
     - Search Bar
     - Bottom Navigation
-  - Movie Details Screen - When clicking on any movie shows:
+- Movie Details Screen - When clicking on any movie shows:
       - Movie Banner
       - Title
       - Release Date
