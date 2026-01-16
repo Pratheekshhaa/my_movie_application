@@ -36,7 +36,7 @@ This project was built as part of an assignment to demonstrate API integration, 
 - API Provider: TMDB (The Movie Database)
 
 ## Project Structure
-`
+```
 app
 │
 ├── manifests
@@ -79,7 +79,7 @@ app
 │   │   └── themes.xml
 │
 └── Gradle Scripts
-`
+```
 
 ## Setup Instructions
 1. Clone Repository
