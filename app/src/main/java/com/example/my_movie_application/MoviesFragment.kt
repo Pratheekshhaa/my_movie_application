@@ -9,7 +9,6 @@ import com.example.my_movie_application.api.MovieResponse
 import com.example.my_movie_application.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
-import com.example.my_movie_application.BuildConfig
 import retrofit2.Response
 
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
@@ -20,7 +19,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         val recycler = view.findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        RetrofitClient.api.getMovies(BuildConfig.TMDB_API_KEY)
+        RetrofitClient.api.getMovies(com.example.my_movie_application.BuildConfig.TMDB_API_KEY)
             .enqueue(object : Callback<MovieResponse> {
 
                 override fun onResponse(

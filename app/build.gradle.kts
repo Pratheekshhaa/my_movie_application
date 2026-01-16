@@ -2,10 +2,11 @@ plugins {
     id("com.android.application")
 }
 
+
 android {
 
     namespace = "com.example.my_movie_application"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.my_movie_application"
@@ -19,7 +20,7 @@ android {
         buildConfigField(
             "String",
             "TMDB_API_KEY",
-            "\"PASTE_YOUR_TMDB_KEY_HERE\""
+            "\"${project.findProperty("TMDB_API_KEY")}\""
         )
     }
 
@@ -36,6 +37,10 @@ android {
 
     buildFeatures {
         buildConfig = true
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -54,5 +59,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.androidx.core.ktx)
 
 }
