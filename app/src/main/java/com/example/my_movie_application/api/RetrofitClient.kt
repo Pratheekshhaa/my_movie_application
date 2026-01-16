@@ -7,15 +7,10 @@ object RetrofitClient {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
 
-    private val retrofit: Retrofit by lazy {
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    val api: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
-    }
+    val apiService: ApiService = retrofit.create(ApiService::class.java)
 }

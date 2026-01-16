@@ -1,52 +1,89 @@
 package com.example.my_movie_application
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.my_movie_application.api.Movie
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MovieDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MovieDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var banner: ImageView
+    private lateinit var title: TextView
+    private lateinit var overview: TextView
+    private lateinit var releaseDate: TextView
+    private lateinit var ratingProgress: ProgressBar
+    private lateinit var playBtn: Button
+    private lateinit var favoriteBtn: ImageButton
+    private lateinit var watchlistBtn: ImageButton
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+    ): View {
+
+        val view =
+            inflater.inflate(R.layout.fragment_movie_details, container, false)
+
+        banner = view.findViewById(R.id.movie_banner)
+        title = view.findViewById(R.id.movie_title)
+        overview = view.findViewById(R.id.movie_overview)
+        releaseDate = view.findViewById(R.id.release_date)
+        ratingProgress = view.findViewById(R.id.rating_progress)
+        playBtn = view.findViewById(R.id.btn_play)
+        favoriteBtn = view.findViewById(R.id.btn_favorite)
+        watchlistBtn = view.findViewById(R.id.btn_watchlist)
+
+        val movie =
+            arguments?.getSerializable("movie") as Movie
+
+        bindMovie(movie)
+
+        return view
     }
 
-    companion object {
+    private fun bindMovie(movie: Movie) {
 
-        fun newInstance(query: String): MoviesFragment {
+        title.text = movie.title
+        overview.text = movie.overview
+        releaseDate.text = "Release: ${movie.releaseDate}"
 
-            val fragment = MoviesFragment()
-            val bundle = Bundle()
-            bundle.putString("query", query)
-            fragment.arguments = bundle
-            return fragment
+        ratingProgress.progress =
+            (movie.voteAverage * 10).toInt()
+
+        val imageUrl =
+            "https://image.tmdb.org/t/p/w780${movie.backdropPath}"
+
+        Glide.with(this)
+            .load(imageUrl)
+            .into(banner)
+
+        playBtn.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                "Movie is Playing",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        favoriteBtn.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                "Added to Favorites",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        watchlistBtn.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                "Added to Watchlist",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
-
 }

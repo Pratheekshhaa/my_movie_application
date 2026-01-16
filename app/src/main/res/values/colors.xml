@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- App Background -->
+    <color name="background_dark">#0D253F</color>
+
+    <!-- Toolbar + Bottom Nav -->
+    <color name="primary_dark">#0D253F</color>
+
+    <!-- Accent Button Color -->
+    <color name="accent_blue">#01B4E4</color>
+
+    <!-- Text Secondary -->
+    <color name="text_gray">#B0B0B0</color>
+
+    <!-- Rating Colors -->
+    <color name="rating_high">#21D07A</color>
+    <color name="rating_medium">#D2D531</color>
+    <color name="rating_low">#DB2360</color>
+    <!-- Default Material fallback colors (REQUIRED by theme) -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+
 </resources>

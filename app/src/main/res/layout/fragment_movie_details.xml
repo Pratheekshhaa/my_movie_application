@@ -1,38 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Banner -->
+
         <ImageView
-            android:id="@+id/banner"
+            android:id="@+id/movie_banner"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:scaleType="centerCrop"/>
 
+        <!-- Content -->
+
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:padding="12dp"/>
 
         <TextView
-            android:id="@+id/releaseDate"/>
+            android:id="@+id/release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:paddingStart="12dp"/>
 
-        <TextView
-            android:id="@+id/overview"/>
-
-        <!-- Rating Circle -->
         <ProgressBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/rating_progress"
             style="?android:attr/progressBarStyleHorizontal"
-            android:max="100"/>
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:max="100"
+            android:progress="0"
+            android:layout_margin="12dp"/>
+
+        <TextView
+            android:id="@+id/movie_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:padding="12dp"/>
+
+        <!-- Buttons -->
 
         <Button
-            android:id="@+id/playBtn"
-            android:text="Play Now"/>
+            android:id="@+id/btn_play"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="PLAY NOW"
+            android:backgroundTint="@color/teal_200"
+            android:layout_margin="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn_favorite"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/btn_star_big_on"
+                android:background="@android:color/transparent"/>
+
+            <ImageButton
+                android:id="@+id/btn_watchlist"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_save"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

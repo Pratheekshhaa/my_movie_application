@@ -1,43 +1,80 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_dark">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <EditText
-            android:id="@+id/searchBox"
-            android:hint="Search movies..."
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <!-- Loading -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
+        <!-- Trending -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Trending"
-            android:textSize="18sp"
-            android:paddingTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/trendingRecycler"
+            android:id="@+id/trending_recycler"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="220dp"/>
 
+        <!-- Popular -->
         <TextView
-            android:text="Popular"
-            android:textSize="18sp"
-            android:paddingTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Popular"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/popularRecycler"
+            android:id="@+id/popular_recycler"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="220dp"/>
+
+        <!-- Latest -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latest Releases"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/latest_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"/>
+
+        <!-- Top Rated -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Rated"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/top_rated_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"/>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

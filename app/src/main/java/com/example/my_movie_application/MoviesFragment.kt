@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,11 +17,13 @@ import kotlinx.coroutines.launch
 
 class MoviesFragment : Fragment() {
 
+    private lateinit var progressBar: ProgressBar
     private lateinit var trendingRecycler: RecyclerView
     private lateinit var popularRecycler: RecyclerView
-    private lateinit var searchBox: EditText
+    private lateinit var latestRecycler: RecyclerView
+    private lateinit var topRatedRecycler: RecyclerView
 
-    private var searchQuery: String? = null
+    private val apiKey = BuildConfig.TMDB_API_KEY
 
     companion object {
 
@@ -35,11 +38,6 @@ class MoviesFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        searchQuery = arguments?.getString(ARG_SEARCH)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,13 +50,17 @@ class MoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // MATCH YOUR XML IDS
-        searchBox = view.findViewById(R.id.searchBox)
-        trendingRecycler = view.findViewById(R.id.trendingRecycler)
-        popularRecycler = view.findViewById(R.id.popularRecycler)
+        // MATCHING YOUR NEW XML IDS
+        progressBar = view.findViewById(R.id.progress_bar)
+        trendingRecycler = view.findViewById(R.id.trending_recycler)
+        popularRecycler = view.findViewById(R.id.popular_recycler)
+        latestRecycler = view.findViewById(R.id.latest_recycler)
+        topRatedRecycler = view.findViewById(R.id.top_rated_recycler)
 
         setupRecycler(trendingRecycler)
         setupRecycler(popularRecycler)
+        setupRecycler(latestRecycler)
+        setupRecycler(topRatedRecycler)
 
         loadMovies()
     }
@@ -73,37 +75,89 @@ class MoviesFragment : Fragment() {
 
     private fun loadMovies() {
 
+        progressBar.visibility = View.VISIBLE
+
         lifecycleScope.launch {
 
             try {
 
-                // USING YOUR OLD WORKING API STYLE
-                val response =
-                    RetrofitClient.api.getMovies(BuildConfig.TMDB_API_KEY)
+                val api = RetrofitClient.apiService
+
+                val trending = api.getTrendingMovies(apiKey)
+                val popular = api.getPopularMovies(apiKey)
+                val latest = api.getNowPlayingMovies(apiKey)
+                val topRated = api.getTopRatedMovies(apiKey)
 
                 trendingRecycler.adapter =
-                    MovieAdapter(response.results) { movie ->
+                    MovieAdapter(trending.results) { movie ->
                         openDetails(movie)
                     }
 
                 popularRecycler.adapter =
-                    MovieAdapter(response.results) { movie ->
+                    MovieAdapter(popular.results) { movie ->
                         openDetails(movie)
                     }
 
+                latestRecycler.adapter =
+                    MovieAdapter(latest.results) { movie ->
+                        openDetails(movie)
+                    }
+
+                topRatedRecycler.adapter =
+                    MovieAdapter(topRated.results) { movie ->
+                        openDetails(movie)
+                    }
+
+                progressBar.visibility = View.GONE
+
             } catch (e: Exception) {
 
-                (activity as? MainActivity)?.showToast("Failed to load movies")
+                progressBar.visibility = View.GONE
+
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to load movies",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
     private fun openDetails(movie: Movie) {
 
-        val intent = Intent(requireContext(), MovieDetailsActivity::class.java)
+        val fragment = MovieDetailsFragment()
 
-        intent.putExtra("movie", movie)
+        val bundle = Bundle()
+        bundle.putSerializable("movie", movie)
 
-        startActivity(intent)
+        fragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+
     }
+    fun searchMovies(query: String) {
+
+        lifecycleScope.launch {
+
+            try {
+
+                val response = RetrofitClient.apiService
+                    .searchMovies(BuildConfig.TMDB_API_KEY, query)
+
+                trendingRecycler.adapter =
+                    MovieAdapter(response.results) { movie ->
+                        openDetails(movie)
+                    }
+
+            } catch (e: Exception) {
+
+                Toast.makeText(requireContext(),
+                    "Search failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 }

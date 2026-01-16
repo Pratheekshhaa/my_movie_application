@@ -6,9 +6,7 @@ import java.io.Serializable
 data class Movie(
 
     val id: Int,
-
     val title: String,
-
     val overview: String,
 
     @SerializedName("poster_path")
@@ -24,8 +22,6 @@ data class Movie(
     val voteAverage: Double,
 
     @SerializedName("vote_count")
-    val voteCount: Int,
-
-    val genres: List<Genre>? = null
+    val voteCount: Int
 
 ) : Serializable

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item
-    android:id="@+id/movies"
-    android:title="Movies"
-    android:icon="@android:drawable/ic_media_play"/>
+    <item
+        android:id="@+id/movies"
+        android:title="Movies"
+        android:icon="@android:drawable/ic_media_play"/>
 
-<item
-    android:id="@+id/favorites"
-    android:title="Favorites"
-    android:icon="@android:drawable/btn_star_big_on"/>
+    <item
+        android:id="@+id/favorites"
+        android:title="Favorites"
+        android:icon="@android:drawable/btn_star_big_on"/>
 
-<item
-    android:id="@+id/watchlist"
-    android:title="Watchlist"
-    android:icon="@android:drawable/ic_menu_save"/>
+    <item
+        android:id="@+id/watchlist"
+        android:title="Watchlist"
+        android:icon="@android:drawable/ic_menu_save"/>
 
 </menu>
-
