@@ -9,32 +9,40 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.my_movie_application.api.Movie
 
-class MovieAdapter(private val list: List<Movie>) :
-    RecyclerView.Adapter<MovieAdapter.Holder>() {
+class MovieAdapter(
+    private val list: List<Movie>,
+    private val onClick: (Movie) -> Unit
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    class Holder(v: View) : RecyclerView.ViewHolder(v) {
-        val poster: ImageView = v.findViewById(R.id.poster)
-        val title: TextView = v.findViewById(R.id.title)
+    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val poster: ImageView = itemView.findViewById(R.id.moviePoster)
+        val title: TextView = itemView.findViewById(R.id.movieTitle)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
 
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.movie_item, parent, false)
 
-        return Holder(view)
+        return MovieViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
         val movie = list[position]
 
         holder.title.text = movie.title
 
         Glide.with(holder.itemView.context)
-            .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
+            .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
             .into(holder.poster)
+
+        // CLICK HANDLER
+        holder.itemView.setOnClickListener {
+            onClick(movie)
+        }
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount(): Int = list.size
 }
